@@ -1,0 +1,40 @@
+<p-panel header="Bank Account Details">
+    <p>Account Name : {{  bankAccount.fullName  }}</p>
+    <p>Account Number : {{  bankAccount.accountNumber  }}</p>
+    <p>Card Number : {{  bankAccount.cardNumber  }}</p>
+    <p>Current Balance : {{  bankAccount.balance  }}</p>
+</p-panel>
+
+<div class="p-grid p-nogutter p-justify-center p-align-center p-fluid" style="height:100%">
+    <div class="  p-xl-3 p-lg-6 p-md-8 p-sm-10">
+        <div class="field">
+            <label for="amount">Amount: </label>
+            <p-inputNumber inputId="transactionAmount" [(ngModel)]="amount">
+            </p-inputNumber>
+        </div>
+       
+        <div class="p-grid">
+            <p-button label="Deposit"     (click)="deposit()"></p-button>
+            <p-button label="Withdrawal"  (click)="withdrawal()"></p-button>
+            <p-button label="logout"  (click)="logout()"></p-button>
+        </div>
+    </div>
+
+    <p-table [value]="transactionHistory">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of cols">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-car>
+            <tr>
+                <td *ngFor="let col of cols">
+                    
+                        {{  col.field=='transactionTypes' ?  (car[col.field] ===0 ? 'Deposit' : 'Withdrawal') : car[col.field]  }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
